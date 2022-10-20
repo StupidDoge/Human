@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PlayerJumpState : PlayerAbilityState
 {
+    private int _amountOfJumpsLeft;
+
     public PlayerJumpState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animationName) : base(player, stateMachine, playerData, animationName)
     {
+        _amountOfJumpsLeft = playerData.AmountOfJumps;
     }
 
     public override void Enter()
@@ -14,5 +17,19 @@ public class PlayerJumpState : PlayerAbilityState
 
         player.SetVelocityY(playerData.JumpVelocity);
         isAbilityDone = true;
+        _amountOfJumpsLeft--;
+        player.InAirState.SetIsJumping();
     }
+
+    public bool CanJump()
+    {
+        if (_amountOfJumpsLeft > 0)
+            return true;
+        else
+            return false;
+    }
+
+    public void ResetAmountOfJumpsLeft() => _amountOfJumpsLeft = playerData.AmountOfJumps;
+
+    public void DecreaseAmountOfJumpsLeft() => _amountOfJumpsLeft--;
 }
