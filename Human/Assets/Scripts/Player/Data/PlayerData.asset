@@ -16,6 +16,7 @@ MonoBehaviour:
   JumpVelocity: 16
   AmountOfJumps: 1
   CoyoteTime: 0.2
+  JumpHeightMultiplier: 0.5
   GroundCheckRadius: 0.3
   GroundLayer:
     serializedVersion: 2
