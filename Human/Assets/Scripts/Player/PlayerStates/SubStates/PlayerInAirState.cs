@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerInAirState : PlayerState
 {
     private int _xInput;
+    private bool _grabInput;
     private bool _isGrounded;
+    private bool _isTouchingWall;
     private bool _jumpInput;
     private bool _jumpInputStop;
     private bool _coyoteTime;
@@ -20,6 +22,7 @@ public class PlayerInAirState : PlayerState
         base.DoChecks();
 
         _isGrounded = player.CheckIfGrounded();
+        _isTouchingWall = player.CheckIfTouchingWall();
     }
 
     public override void Enter()
@@ -41,6 +44,7 @@ public class PlayerInAirState : PlayerState
         _xInput = player.InputHandler.NormalizedInputX;
         _jumpInput = player.InputHandler.JumpInput;
         _jumpInputStop = player.InputHandler.JumpInputStop;
+        _grabInput = player.InputHandler.GrabInput;
 
         CheckJumpMultiplier();
 
@@ -48,6 +52,10 @@ public class PlayerInAirState : PlayerState
             stateMachine.ChangeState(player.LandState);
         else if (_jumpInput && player.JumpState.CanJump())
             stateMachine.ChangeState(player.JumpState);
+        else if (_isTouchingWall && _grabInput)
+            stateMachine.ChangeState(player.WallGrabState);
+        else if (_isTouchingWall && _xInput == player.FacingDirection && player.CurrentVelocity.y <= 0f)
+            stateMachine.ChangeState(player.WallSlideState);
         else
         {
             player.CheckIfShouldFlip(_xInput);

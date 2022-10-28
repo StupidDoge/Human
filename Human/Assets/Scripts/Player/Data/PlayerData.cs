@@ -5,18 +5,25 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewPlayerData", menuName = "Data/Player Data/Base Data")]
 public class PlayerData : ScriptableObject
 {
-    [Header("Move state")]
+    [Header("Move State")]
     public float MovementVelocity = 10f;
 
-    [Header("Jump state")]
+    [Header("Jump State")]
     public float JumpVelocity = 15f;
     public int AmountOfJumps = 1;
 
-    [Header("In Air state")]
+    [Header("In Air State")]
     public float CoyoteTime = 0.2f;
     public float JumpHeightMultiplier = 0.5f;
 
+    [Header("Wall Slide State")]
+    public float WallSlideVelocity = 3f;
+
+    [Header("Wall Climb State")]
+    public float WallClimbVelocity = 3f;
+
     [Header("Check variables")]
     public float GroundCheckRadius = 0.3f;
+    public float WallCheckDistance = 0.5f;
     public LayerMask GroundLayer;
 }
