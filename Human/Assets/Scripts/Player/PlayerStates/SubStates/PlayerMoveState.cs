@@ -32,7 +32,7 @@ public class PlayerMoveState : PlayerGroundedState
 
         if (xInput == 0 && !isExitingState)
         {
-            player.StateMachine.ChangeState(player.IdleState);
+            stateMachine.ChangeState(player.IdleState);
         }
     }
 

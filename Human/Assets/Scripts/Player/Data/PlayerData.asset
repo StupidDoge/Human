@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovementVelocity: 10
   JumpVelocity: 16
-  AmountOfJumps: 2
+  AmountOfJumps: 1
+  wallJumpVelocity: 16
+  wallJumpTime: 0.4
+  wallJumpAngle: {x: 1, y: 2}
   CoyoteTime: 0.2
   JumpHeightMultiplier: 0.5
   WallSlideVelocity: 4
