@@ -49,13 +49,22 @@ public class PlayerInAirState : PlayerState
         CheckJumpMultiplier();
 
         if (_isGrounded && player.CurrentVelocity.y < 0.01f)
+        {
             stateMachine.ChangeState(player.LandState);
+        }
         else if (_jumpInput && player.JumpState.CanJump())
+        {
+            player.InputHandler.UseJumpInput();
             stateMachine.ChangeState(player.JumpState);
+        }
         else if (_isTouchingWall && _grabInput)
+        {
             stateMachine.ChangeState(player.WallGrabState);
+        }
         else if (_isTouchingWall && _xInput == player.FacingDirection && player.CurrentVelocity.y <= 0f)
+        {
             stateMachine.ChangeState(player.WallSlideState);
+        }
         else
         {
             player.CheckIfShouldFlip(_xInput);
