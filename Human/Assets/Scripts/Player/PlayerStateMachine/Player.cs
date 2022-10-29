@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     public PlayerWallGrabState WallGrabState { get; private set; }
     public PlayerWallClimbState WallClimbState { get; private set; }
     public PlayerWallJumpState WallJumpState { get; private set; }
+    public PlayerLedgeClimbState LedgeClimbState { get; private set; }
 
     public Animator PlayerAnimator { get; private set; }
     public PlayerInputHandler InputHandler { get; private set; }
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private Transform _wallCheck;
+    [SerializeField] private Transform _ledgeCheck;
 
     private void Awake()
     {
@@ -43,6 +45,7 @@ public class Player : MonoBehaviour
         WallGrabState = new PlayerWallGrabState(this, StateMachine, _playerData, "wallGrab");
         WallClimbState = new PlayerWallClimbState(this, StateMachine, _playerData, "wallClimb");
         WallJumpState = new PlayerWallJumpState(this, StateMachine, _playerData, "inAir");
+        LedgeClimbState = new PlayerLedgeClimbState(this, StateMachine, _playerData, "ledgeClimbState");
     }
 
     private void Start()
@@ -65,6 +68,15 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         StateMachine.CurrentState.PhysicsUpdate();
+    }
+
+    /*public void SetRigidbodyGravityScale() => Rigidbody.gravityScale = 5;*/
+
+    public void SetVelocityZero()
+    {
+        Rigidbody.velocity = Vector2.zero;
+        CurrentVelocity = Vector2.zero;
+        /*Rigidbody.gravityScale = 0;*/
     }
 
     public void SetVelocityX(float velocity)
@@ -104,10 +116,27 @@ public class Player : MonoBehaviour
         return Physics2D.Raycast(_wallCheck.position, Vector2.right * -FacingDirection, _playerData.WallCheckDistance, _playerData.GroundLayer);
     }
 
+    public bool CheckIfTouchingLedge()
+    {
+        return Physics2D.Raycast(_ledgeCheck.position, Vector2.right * FacingDirection, _playerData.WallCheckDistance, _playerData.GroundLayer);
+    }
+
     public void CheckIfShouldFlip(int xInput)
     {
         if (xInput != 0 && xInput != FacingDirection)
             Flip();
+    }
+
+    public Vector2 DetermineCornerPosition()
+    {
+        RaycastHit2D xHit = Physics2D.Raycast(_wallCheck.position, Vector2.right * FacingDirection, _playerData.WallCheckDistance, _playerData.GroundLayer);
+        float xDistance = xHit.distance;
+        _workspace.Set(xDistance * FacingDirection, 0);
+        RaycastHit2D yHit = Physics2D.Raycast(_ledgeCheck.position + (Vector3)(_workspace), Vector2.down, _ledgeCheck.position.y - _wallCheck.position.y, _playerData.GroundLayer);
+        float yDistance = yHit.distance;
+
+        _workspace.Set(_wallCheck.position.x + (xDistance * FacingDirection), _ledgeCheck.position.y - yDistance);
+        return _workspace;
     }
 
     private void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
