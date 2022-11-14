@@ -71,6 +71,7 @@ public class BasicEnemyController : MonoBehaviour
                 break;
             case State.Dead:
                 UpdateDeadState();
+                break;
         }
     }
 
@@ -106,7 +107,7 @@ public class BasicEnemyController : MonoBehaviour
 
     private void EnterKnockbackState()
     {
-        knockbackStartTime = knockbackStartTime.time;
+        knockbackStartTime = Time.time;
         movement.Set(knockbackSpeed.x * damageDirection, knockbackSpeed.y);
         aliveRb.velocity = movement;
         aliveAnim.SetBool("Knockback", true);
@@ -114,7 +115,7 @@ public class BasicEnemyController : MonoBehaviour
 
     private void UpdateKnockbackState()
     {
-        if(knockbackStartTime.time >= knockbackStartTime * knockbackDuration)
+        if(Time.time >= knockbackStartTime * knockbackDuration)
         {
             SwitchState(State.Moving);
         }
@@ -145,7 +146,7 @@ public class BasicEnemyController : MonoBehaviour
 
     //--OTHER FUNCTIONS-------------------------------------------------------------------------------------
 
-    private void Damage(float attackDetails)
+    private void Damage(float[] attackDetails)
     {
         currentHealth -= attackDetails[0];
 
