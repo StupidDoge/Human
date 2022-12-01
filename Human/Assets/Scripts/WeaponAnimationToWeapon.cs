@@ -15,4 +15,8 @@ public class WeaponAnimationToWeapon : MonoBehaviour
     {
         _weapon.AnimationFinishTrigger();
     }
+
+    private void StartAnimationMovementTrigger() => _weapon.StartAnimationMovementTrigger();
+
+    private void StopAnimationMovementTrigger() => _weapon.StopAnimationMovementTrigger();
 }
