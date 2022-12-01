@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
     public PlayerAttackState PrimaryAttackState { get; private set; }
     public PlayerAttackState SecondaryAttackState { get; private set; }
 
+    public PlayerInventory Inventory { get; private set; }
+
     public Animator PlayerAnimator { get; private set; }
     public PlayerInputHandler InputHandler { get; private set; }
     public Rigidbody2D Rigidbody { get; private set; }
@@ -54,11 +56,15 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        Inventory = GetComponent<PlayerInventory>();
+
         PlayerAnimator = GetComponent<Animator>();
         InputHandler = GetComponent<PlayerInputHandler>();
         Rigidbody = GetComponent<Rigidbody2D>();
 
         FacingDirection = 1;
+
+        PrimaryAttackState.SetWeapon(Inventory.Weapons[(int)CombatInputs.primary]);
 
         StateMachine.Init(IdleState);
     }
