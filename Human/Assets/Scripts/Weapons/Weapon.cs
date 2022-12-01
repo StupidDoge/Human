@@ -54,6 +54,16 @@ public class Weapon : MonoBehaviour
         playerAttackState.AnimationFinishTrigger();
     }
 
+    public virtual void AnimationTurnOnFlip()
+    {
+        playerAttackState.SetFlipCheck(true);
+    }
+
+    public virtual void AnimationTurnOffFlip()
+    {
+        playerAttackState.SetFlipCheck(false);
+    }
+
     public void InitWeapon(PlayerAttackState state)
     {
         playerAttackState = state;
