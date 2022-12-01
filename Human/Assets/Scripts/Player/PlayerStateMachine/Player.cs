@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     public PlayerWallClimbState WallClimbState { get; private set; }
     public PlayerWallJumpState WallJumpState { get; private set; }
     public PlayerLedgeClimbState LedgeClimbState { get; private set; }
+    public PlayerAttackState PrimaryAttackState { get; private set; }
+    public PlayerAttackState SecondaryAttackState { get; private set; }
 
     public Animator PlayerAnimator { get; private set; }
     public PlayerInputHandler InputHandler { get; private set; }
@@ -46,6 +48,8 @@ public class Player : MonoBehaviour
         WallClimbState = new PlayerWallClimbState(this, StateMachine, _playerData, "wallClimb");
         WallJumpState = new PlayerWallJumpState(this, StateMachine, _playerData, "inAir");
         LedgeClimbState = new PlayerLedgeClimbState(this, StateMachine, _playerData, "ledgeClimbState");
+        PrimaryAttackState = new PlayerAttackState(this, StateMachine, _playerData, "attack");
+        SecondaryAttackState = new PlayerAttackState(this, StateMachine, _playerData, "attack");
     }
 
     private void Start()
