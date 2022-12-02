@@ -9,10 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bbd03f87fe78244681a37e83c89ac65, type: 3}
+  m_Script: {fileID: 11500000, guid: 8214d4b7fa9fcee45ae880bcc8c12790, type: 3}
   m_Name: BasicAttackData
   m_EditorClassIdentifier: 
-  MovementSpeed:
-  - 0
-  - 0
-  - -2
+  _attackDetails:
+  - AttackName: first
+    MovementSpeed: 0
+    DamageAmount: 2
+  - AttackName: second
+    MovementSpeed: 0
+    DamageAmount: 2
+  - AttackName: third
+    MovementSpeed: -2
+    DamageAmount: 3
