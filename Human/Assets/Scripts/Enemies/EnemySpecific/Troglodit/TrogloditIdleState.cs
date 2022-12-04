@@ -25,7 +25,11 @@ public class TrogloditIdleState : IdleState
     {
         base.LogicUpdate();
 
-        if (isIdleTimeOver)
+        if (isPlayerInMinAgroRange)
+        {
+            stateMachine.ChangeState(_troglodit.PlayerDetectedState);
+        }
+        else if (isIdleTimeOver)
             stateMachine.ChangeState(_troglodit.MoveState);
     }
 

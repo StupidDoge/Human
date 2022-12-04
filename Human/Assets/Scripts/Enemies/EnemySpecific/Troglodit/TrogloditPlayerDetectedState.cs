@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrogloditMoveState : MoveState
+public class TrogloditPlayerDetectedState : PlayerDetectedState
 {
     private Troglodit _troglodit;
 
-    public TrogloditMoveState(Entity entity, FiniteStateMachine stateMachine, string animationName, MoveStateData stateData, Troglodit troglodit) : base(entity, stateMachine, animationName, stateData)
+    public TrogloditPlayerDetectedState(Entity entity, FiniteStateMachine stateMachine, string animationName, PlayerDetectedStateData stateData, Troglodit troglodit) : base(entity, stateMachine, animationName, stateData)
     {
         _troglodit = troglodit;
     }
@@ -25,13 +25,9 @@ public class TrogloditMoveState : MoveState
     {
         base.LogicUpdate();
 
-        if (isPlayerInMinAgroRange)
+        if (!isPlayerInMaxAgroRange)
         {
-            stateMachine.ChangeState(_troglodit.PlayerDetectedState);
-        }
-        else if (isDetectingWall || !isDetectingLedge)
-        {
-            _troglodit.IdleState.SetFlipAfterIdle(true);
+            _troglodit.IdleState.SetFlipAfterIdle(false);
             stateMachine.ChangeState(_troglodit.IdleState);
         }
     }

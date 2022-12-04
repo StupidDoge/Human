@@ -15,6 +15,7 @@ public class Entity : MonoBehaviour
 
     [SerializeField] private Transform _wallCheck;
     [SerializeField] private Transform _ledgeCheck;
+    [SerializeField] private Transform _playerCheck;
 
     private Vector2 _velocityWorkspace;
 
@@ -54,6 +55,16 @@ public class Entity : MonoBehaviour
         return Physics2D.Raycast(_ledgeCheck.position, Vector2.down, Data.LedgeCheckDistance, Data.GroundLayer);
     }
 
+    public virtual bool CheckPlayerInMinAgroRange()
+    {
+        return Physics2D.Raycast(_playerCheck.position, AliveGameObject.transform.right, Data.MinAgroDistance, Data.PlayerLayer);
+    }
+
+    public virtual bool CheckPlayerInMaxAgroRange()
+    {
+        return Physics2D.Raycast(_playerCheck.position, AliveGameObject.transform.right, Data.MaxAgroDistance, Data.PlayerLayer);
+    }
+
     public virtual void Flip()
     {
         FacingDirection *= -1;
@@ -64,5 +75,6 @@ public class Entity : MonoBehaviour
     {
         Gizmos.DrawLine(_wallCheck.position, _wallCheck.position + (Vector3)(Vector2.right * FacingDirection * Data.WallCheckDistance));
         Gizmos.DrawLine(_ledgeCheck.position, _ledgeCheck.position + (Vector3)(Vector2.down * Data.LedgeCheckDistance));
+        Gizmos.DrawLine(_playerCheck.position, _playerCheck.position + (Vector3)(Vector2.right * Data.MinAgroDistance * FacingDirection));
     }
 }
