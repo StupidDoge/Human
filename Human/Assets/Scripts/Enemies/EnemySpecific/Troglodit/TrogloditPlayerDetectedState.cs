@@ -25,10 +25,13 @@ public class TrogloditPlayerDetectedState : PlayerDetectedState
     {
         base.LogicUpdate();
 
-        if (!isPlayerInMaxAgroRange)
+        if (performLongRangeAction)
         {
-            _troglodit.IdleState.SetFlipAfterIdle(false);
-            stateMachine.ChangeState(_troglodit.IdleState);
+            stateMachine.ChangeState(_troglodit.ChargeState);
+        }
+        else if (!isPlayerInMaxAgroRange)
+        {
+            stateMachine.ChangeState(_troglodit.LookForPlayerState);
         }
     }
 

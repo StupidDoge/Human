@@ -16215,7 +16215,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: 4199f59213fa89b47a5d318a5b5288a9, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -16266,6 +16266,8 @@ MonoBehaviour:
   _moveStateData: {fileID: 11400000, guid: a5f90936ef292894091806e8ba897be0, type: 2}
   _idleStateData: {fileID: 11400000, guid: 99faa7f7790ac5e458778bc2dde41229, type: 2}
   _playerDetectedStateData: {fileID: 11400000, guid: 0e0ca1894f2349948a449416eb9a07b3, type: 2}
+  _chargeStateData: {fileID: 11400000, guid: 7ffdc399e8be61f44a5757c35dfe980f, type: 2}
+  _lookForPlayerStateData: {fileID: 11400000, guid: cfa0d6548632fe444885119f6ce386f7, type: 2}
 --- !u!1 &1086769237
 GameObject:
   m_ObjectHideFlags: 0

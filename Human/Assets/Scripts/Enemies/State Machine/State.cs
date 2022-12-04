@@ -22,6 +22,7 @@ public class State
     {
         startTime = Time.time;
         entity.EnemyAnimator.SetBool(animationName, true);
+        DoChecks();
     }
 
     public virtual void LogicUpdate()
@@ -31,11 +32,16 @@ public class State
 
     public virtual void PhysicsUpdate()
     {
-
+        DoChecks();
     }
 
     public virtual void Exit()
     {
         entity.EnemyAnimator.SetBool(animationName, false);
+    }
+
+    public virtual void DoChecks()
+    {
+
     }
 }
