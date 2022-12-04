@@ -25,14 +25,12 @@ public class TrogloditPlayerDetectedState : PlayerDetectedState
     {
         base.LogicUpdate();
 
-        if (performLongRangeAction)
-        {
+        if (performCloseRangeAction)
+            stateMachine.ChangeState(_troglodit.MeleeAttackState);
+        else if (performLongRangeAction)
             stateMachine.ChangeState(_troglodit.ChargeState);
-        }
         else if (!isPlayerInMaxAgroRange)
-        {
             stateMachine.ChangeState(_troglodit.LookForPlayerState);
-        }
     }
 
     public override void PhysicsUpdate()

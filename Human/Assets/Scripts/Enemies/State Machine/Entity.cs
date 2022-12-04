@@ -10,6 +10,7 @@ public class Entity : MonoBehaviour
     public Rigidbody2D EnemyRigidbody { get; private set; }
     public Animator EnemyAnimator { get; private set; }
     public GameObject AliveGameObject { get; private set; }
+    public AnimationToStateMachine AnimToStateMachine { get; private set; }
 
     public int FacingDirection { get; private set; }
 
@@ -27,6 +28,7 @@ public class Entity : MonoBehaviour
         AliveGameObject = transform.Find("Alive").gameObject;
         EnemyRigidbody = GetComponent<Rigidbody2D>();
         EnemyAnimator = AliveGameObject.GetComponent<Animator>();
+        AnimToStateMachine = AliveGameObject.GetComponent<AnimationToStateMachine>();
     }
 
     public virtual void Update()
@@ -65,16 +67,24 @@ public class Entity : MonoBehaviour
         return Physics2D.Raycast(_playerCheck.position, AliveGameObject.transform.right, Data.MaxAgroDistance, Data.PlayerLayer);
     }
 
+    public virtual bool CheckPlayerInCloseRangeAction()
+    {
+        return Physics2D.Raycast(_playerCheck.position, AliveGameObject.transform.right, Data.CloseRangeActionDistance, Data.PlayerLayer);
+    }
+
     public virtual void Flip()
     {
         FacingDirection *= -1;
         AliveGameObject.transform.Rotate(0, 180f, 0);
     }
 
-    public virtual void OnDrawGizmos()
+    /*public virtual void OnDrawGizmos()
     {
         Gizmos.DrawLine(_wallCheck.position, _wallCheck.position + (Vector3)(Vector2.right * FacingDirection * Data.WallCheckDistance));
         Gizmos.DrawLine(_ledgeCheck.position, _ledgeCheck.position + (Vector3)(Vector2.down * Data.LedgeCheckDistance));
         Gizmos.DrawLine(_playerCheck.position, _playerCheck.position + (Vector3)(Vector2.right * Data.MinAgroDistance * FacingDirection));
-    }
+        Gizmos.DrawWireSphere(_playerCheck.position + (Vector3)(AliveGameObject.transform.right * Data.CloseRangeActionDistance), 0.2f);
+        Gizmos.DrawWireSphere(_playerCheck.position + (Vector3)(AliveGameObject.transform.right * Data.MinAgroDistance), 0.2f);
+        Gizmos.DrawWireSphere(_playerCheck.position + (Vector3)(AliveGameObject.transform.right * Data.MaxAgroDistance), 0.2f);
+    }*/
 }

@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrogloditChargeState : ChargeState
+public class TrogloditMeleeAttackState : MeleeAttackState
 {
     private Troglodit _troglodit;
 
-    public TrogloditChargeState(Entity entity, FiniteStateMachine stateMachine, string animationName, ChargeStateData stateData, Troglodit troglodit) : base(entity, stateMachine, animationName, stateData)
+    public TrogloditMeleeAttackState(Entity entity, FiniteStateMachine stateMachine, string animationName, Transform attackPosition, MeleeAttackStateData stateData, Troglodit troglodit) : base(entity, stateMachine, animationName, attackPosition, stateData)
     {
         _troglodit = troglodit;
     }
@@ -26,17 +26,16 @@ public class TrogloditChargeState : ChargeState
         base.Exit();
     }
 
+    public override void FinishAttack()
+    {
+        base.FinishAttack();
+    }
+
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
-        if (performCloseRangeAction)
-            stateMachine.ChangeState(_troglodit.MeleeAttackState);
-       else if (!isDetectingLedge || isDetectingWall)
-        {
-            stateMachine.ChangeState(_troglodit.LookForPlayerState);
-        }
-        else if (isChargeTimeOver)
+        if (isAnimationFinished)
         {
             if (isPlayerInMinAgroRange)
                 stateMachine.ChangeState(_troglodit.PlayerDetectedState);
@@ -48,5 +47,10 @@ public class TrogloditChargeState : ChargeState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+    }
+
+    public override void TriggerAttack()
+    {
+        base.TriggerAttack();
     }
 }

@@ -227,6 +227,7 @@ GameObject:
   - component: {fileID: 500807260}
   - component: {fileID: 500807265}
   - component: {fileID: 500807262}
+  - component: {fileID: 500807266}
   m_Layer: 6
   m_Name: Alive
   m_TagString: Enemy
@@ -249,6 +250,7 @@ Transform:
   - {fileID: 1788914386}
   - {fileID: 483731852}
   - {fileID: 1865010752}
+  - {fileID: 711187121}
   m_Father: {fileID: 1046771692}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -324,6 +326,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &500807266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500807259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5789b76d5f22ef43911f9af6f08c63d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &562352211
 GameObject:
   m_ObjectHideFlags: 0
@@ -15774,6 +15788,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: c1cdea7296abdb347abd9b34ce2f3847, type: 2}
+--- !u!1 &711187120
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 711187121}
+  m_Layer: 6
+  m_Name: MeleeAttackPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &711187121
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711187120}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.67, y: 0.32, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 500807260}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &716171254
 GameObject:
   m_ObjectHideFlags: 0
@@ -16101,8 +16146,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDrag: 0.4
+  m_AngularDrag: 1
   m_GravityScale: 5
   m_Material: {fileID: 6200000, guid: 4199f59213fa89b47a5d318a5b5288a9, type: 2}
   m_Interpolate: 1
@@ -16212,11 +16257,11 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: 4199f59213fa89b47a5d318a5b5288a9, type: 2}
+  m_Material: {fileID: 6200000, guid: 8b3857501467a0e45a29d64e6a5b4019, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -16268,6 +16313,8 @@ MonoBehaviour:
   _playerDetectedStateData: {fileID: 11400000, guid: 0e0ca1894f2349948a449416eb9a07b3, type: 2}
   _chargeStateData: {fileID: 11400000, guid: 7ffdc399e8be61f44a5757c35dfe980f, type: 2}
   _lookForPlayerStateData: {fileID: 11400000, guid: cfa0d6548632fe444885119f6ce386f7, type: 2}
+  _meleeAttackStateData: {fileID: 11400000, guid: 2c7eca3e9658e52449d371b519cb50ff, type: 2}
+  _meleeAttackPosition: {fileID: 711187121}
 --- !u!1 &1086769237
 GameObject:
   m_ObjectHideFlags: 0
@@ -19084,7 +19131,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865010751}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0.35, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

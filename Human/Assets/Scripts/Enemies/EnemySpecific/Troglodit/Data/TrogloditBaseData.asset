@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WallCheckDistance: 0.4
   LedgeCheckDistance: 0.5
-  MinAgroDistance: 4
+  MinAgroDistance: 7
   MaxAgroDistance: 8
+  CloseRangeActionDistance: 1.33
   GroundLayer:
     serializedVersion: 2
     m_Bits: 8

@@ -11,6 +11,8 @@ public class EntityData : ScriptableObject
     public float MinAgroDistance;
     public float MaxAgroDistance;
 
+    public float CloseRangeActionDistance = 1f;
+
     public LayerMask GroundLayer;
     public LayerMask PlayerLayer;
 }

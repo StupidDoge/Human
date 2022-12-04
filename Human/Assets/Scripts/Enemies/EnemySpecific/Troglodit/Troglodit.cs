@@ -9,12 +9,16 @@ public class Troglodit : Entity
     public TrogloditPlayerDetectedState PlayerDetectedState { get; private set; }
     public TrogloditChargeState ChargeState { get; private set; }
     public TrogloditLookForPlayerState LookForPlayerState { get; private set; }
+    public TrogloditMeleeAttackState MeleeAttackState { get; private set; }
 
     [SerializeField] private MoveStateData _moveStateData;
     [SerializeField] private IdleStateData _idleStateData;
     [SerializeField] private PlayerDetectedStateData _playerDetectedStateData;
     [SerializeField] private ChargeStateData _chargeStateData;
     [SerializeField] private LookForPlayerStateData _lookForPlayerStateData;
+    [SerializeField] private MeleeAttackStateData _meleeAttackStateData;
+
+    [SerializeField] private Transform _meleeAttackPosition;
 
     public override void Start()
     {
@@ -25,7 +29,15 @@ public class Troglodit : Entity
         PlayerDetectedState = new TrogloditPlayerDetectedState(this, StateMachine, "playerDetected", _playerDetectedStateData, this);
         ChargeState = new TrogloditChargeState(this, StateMachine, "charge", _chargeStateData, this);
         LookForPlayerState = new TrogloditLookForPlayerState(this, StateMachine, "lookForPlayer", _lookForPlayerStateData, this);
+        MeleeAttackState = new TrogloditMeleeAttackState(this, StateMachine, "meleeAttack", _meleeAttackPosition, _meleeAttackStateData, this);
 
         StateMachine.Init(MoveState);
     }
+
+    /*public override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+
+        Gizmos.DrawWireSphere(_meleeAttackPosition.position, _meleeAttackStateData.AttackRadius);
+    }*/
 }
