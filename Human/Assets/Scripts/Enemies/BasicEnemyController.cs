@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicEnemyController : MonoBehaviour
+public class BasicEnemyController : MonoBehaviour, IDamageable
 {
     private enum State
     {
@@ -53,10 +53,11 @@ public class BasicEnemyController : MonoBehaviour
     private void Start()
     {
         alive = transform.Find("Alive").gameObject;
-        aliveRb = alive.GetComponent<Rigidbody2D>();
+        aliveRb = GetComponent<Rigidbody2D>();
         aliveAnim = alive.GetComponent<Animator>();
 
         facingDirection = 1;
+        currentHealth = maxHealth;
     }
 
     private void Update()
@@ -108,7 +109,7 @@ public class BasicEnemyController : MonoBehaviour
     private void EnterKnockbackState()
     {
         knockbackStartTime = Time.time;
-        movement.Set(knockbackSpeed.x * damageDirection, knockbackSpeed.y);
+        movement.Set(knockbackSpeed.x * damageDirection, 0);
         aliveRb.velocity = movement;
         aliveAnim.SetBool("Knockback", true);
     }
@@ -146,18 +147,19 @@ public class BasicEnemyController : MonoBehaviour
 
     //--OTHER FUNCTIONS-------------------------------------------------------------------------------------
 
-    private void Damage(float[] attackDetails)
+    public void Damage(float attackDetails)
     {
-        currentHealth -= attackDetails[0];
+        Debug.Log("damage " + attackDetails + " health " + currentHealth);
+        currentHealth -= attackDetails;
 
-        if(attackDetails[1] > alive.transform.position.x)
+        /*if(attackDetails[1] > alive.transform.position.x)
         {
             damageDirection = -1;
         }
         else
         {
             damageDirection = 1;
-        }
+        }*/
 
         //Hit particle
 
