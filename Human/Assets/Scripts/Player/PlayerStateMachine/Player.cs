@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -71,6 +72,16 @@ public class Player : MonoBehaviour
         PrimaryAttackState.SetWeapon(Inventory.Weapons[(int)CombatInputs.primary]);
 
         StateMachine.Init(IdleState);
+    }
+
+    private void OnEnable()
+    {
+        DialogueManager.OnInputEnabled += SetInputEnabled;
+    }
+
+    private void OnDisable()
+    {
+        DialogueManager.OnInputEnabled -= SetInputEnabled;
     }
 
     private void Update()
@@ -162,4 +173,6 @@ public class Player : MonoBehaviour
         FacingDirection *= -1;
         transform.Rotate(0f, 180f, 0f);
     }
+
+    private void SetInputEnabled(bool enabled) => GetComponent<PlayerInput>().enabled = enabled;
 }
