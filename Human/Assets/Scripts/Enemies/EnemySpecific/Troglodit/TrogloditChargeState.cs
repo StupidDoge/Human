@@ -32,7 +32,7 @@ public class TrogloditChargeState : ChargeState
 
         if (performCloseRangeAction)
             stateMachine.ChangeState(_troglodit.MeleeAttackState);
-       else if (!isDetectingLedge || isDetectingWall)
+        else if (!isDetectingLedge || isDetectingWall)
         {
             stateMachine.ChangeState(_troglodit.LookForPlayerState);
         }

@@ -15,7 +15,7 @@ MonoBehaviour:
   _attackDetails:
   - AttackName: first
     MovementSpeed: 0
-    DamageAmount: 2
+    DamageAmount: 9
   - AttackName: second
     MovementSpeed: 0
     DamageAmount: 2

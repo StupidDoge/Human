@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Entity : MonoBehaviour
+public class Entity : MonoBehaviour, IDamageable
 {
     public FiniteStateMachine StateMachine { get; private set; }
     public EntityData Data;
 
+    public BoxCollider2D EnemyBoxCollider { get; set; }
     public Rigidbody2D EnemyRigidbody { get; private set; }
     public Animator EnemyAnimator { get; private set; }
     public GameObject AliveGameObject { get; private set; }
     public AnimationToStateMachine AnimToStateMachine { get; private set; }
 
     public int FacingDirection { get; private set; }
+    public bool IsDead { get; private set; }
 
     [SerializeField] private Transform _wallCheck;
     [SerializeField] private Transform _ledgeCheck;
@@ -20,13 +22,17 @@ public class Entity : MonoBehaviour
 
     private Vector2 _velocityWorkspace;
 
+    private float _currentHealth;
+
     public virtual void Start()
     {
         StateMachine = new FiniteStateMachine();
         FacingDirection = 1;
+        _currentHealth = Data.MaxHealth;
 
         AliveGameObject = transform.Find("Alive").gameObject;
         EnemyRigidbody = GetComponent<Rigidbody2D>();
+        EnemyBoxCollider = GetComponent<BoxCollider2D>();
         EnemyAnimator = AliveGameObject.GetComponent<Animator>();
         AnimToStateMachine = AliveGameObject.GetComponent<AnimationToStateMachine>();
     }
@@ -70,6 +76,21 @@ public class Entity : MonoBehaviour
     public virtual bool CheckPlayerInCloseRangeAction()
     {
         return Physics2D.Raycast(_playerCheck.position, AliveGameObject.transform.right, Data.CloseRangeActionDistance, Data.PlayerLayer);
+    }
+
+    public void SetZeroGravity()
+    {
+        EnemyRigidbody.gravityScale = 0;
+    }
+
+    public virtual void Damage(float damage)
+    {
+        _currentHealth -= damage;
+
+        if (_currentHealth <= 0)
+        {
+            IsDead = true;
+        }
     }
 
     public virtual void Flip()

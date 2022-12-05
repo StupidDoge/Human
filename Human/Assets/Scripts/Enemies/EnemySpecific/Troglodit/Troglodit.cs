@@ -10,6 +10,7 @@ public class Troglodit : Entity
     public TrogloditChargeState ChargeState { get; private set; }
     public TrogloditLookForPlayerState LookForPlayerState { get; private set; }
     public TrogloditMeleeAttackState MeleeAttackState { get; private set; }
+    public TrogloditDeadState DeadState { get; private set; }
 
     [SerializeField] private MoveStateData _moveStateData;
     [SerializeField] private IdleStateData _idleStateData;
@@ -17,6 +18,7 @@ public class Troglodit : Entity
     [SerializeField] private ChargeStateData _chargeStateData;
     [SerializeField] private LookForPlayerStateData _lookForPlayerStateData;
     [SerializeField] private MeleeAttackStateData _meleeAttackStateData;
+    [SerializeField] private DeadStateData _deadStateData;
 
     [SerializeField] private Transform _meleeAttackPosition;
 
@@ -30,8 +32,17 @@ public class Troglodit : Entity
         ChargeState = new TrogloditChargeState(this, StateMachine, "charge", _chargeStateData, this);
         LookForPlayerState = new TrogloditLookForPlayerState(this, StateMachine, "lookForPlayer", _lookForPlayerStateData, this);
         MeleeAttackState = new TrogloditMeleeAttackState(this, StateMachine, "meleeAttack", _meleeAttackPosition, _meleeAttackStateData, this);
+        DeadState = new TrogloditDeadState(this, StateMachine, "dead", _deadStateData, this);
 
         StateMachine.Init(MoveState);
+    }
+
+    public override void Damage(float damage)
+    {
+        base.Damage(damage);
+
+        if (IsDead)
+            StateMachine.ChangeState(DeadState);
     }
 
     /*public override void OnDrawGizmos()
