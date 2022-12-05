@@ -15,8 +15,8 @@ MonoBehaviour:
   MaxHealth: 6
   WallCheckDistance: 0.4
   LedgeCheckDistance: 0.5
-  MinAgroDistance: 7
-  MaxAgroDistance: 8
+  MinAgroDistance: 10
+  MaxAgroDistance: 12
   CloseRangeActionDistance: 1.33
   GroundLayer:
     serializedVersion: 2

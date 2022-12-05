@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03b2caf512c857b4e8c918dc49467bbb, type: 3}
   m_Name: TrogloditPlayerDetectedStateData
   m_EditorClassIdentifier: 
+  LongRangeActionTime: 0.5
