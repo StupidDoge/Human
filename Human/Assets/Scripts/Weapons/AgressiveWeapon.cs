@@ -9,9 +9,13 @@ public class AgressiveWeapon : Weapon
 
     private List<IDamageable> _detectedDamageables = new List<IDamageable>();
 
+    private AudioSource _audioSource;
+
     protected override void Awake()
     {
         base.Awake();
+
+        _audioSource = GetComponent<AudioSource>();
 
         if (weaponData.GetType() == typeof(AgressiveWeaponSO))
             agressiveWeaponData = (AgressiveWeaponSO)weaponData;
@@ -29,6 +33,9 @@ public class AgressiveWeapon : Weapon
     private void CheckMeleeAttack()
     {
         WeaponAttackDetails details = agressiveWeaponData.AttackDetails[attackCounter];
+
+        if (_detectedDamageables.Count != 0)
+            _audioSource.PlayOneShot(details.AttackSound);
 
         foreach (IDamageable item in _detectedDamageables.ToList())
         {

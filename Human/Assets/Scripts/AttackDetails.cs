@@ -12,4 +12,5 @@ public struct WeaponAttackDetails
     public string AttackName;
     public float MovementSpeed;
     public float DamageAmount;
+    public AudioClip AttackSound;
 }
