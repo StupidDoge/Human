@@ -42,6 +42,11 @@ public class DeadState : State
         base.PhysicsUpdate();
     }
 
+    public virtual void DeathAction()
+    {
+        entity.SoundController.PlayDeathSound();
+    }
+
     public virtual void FinishDeath()
     {
         isAnimationFinished = true;

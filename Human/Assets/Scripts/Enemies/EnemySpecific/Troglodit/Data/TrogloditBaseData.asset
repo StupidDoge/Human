@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfe4fd4f445699a48a187f7b77ff6d32, type: 3}
   m_Name: TrogloditBaseData
   m_EditorClassIdentifier: 
-  MaxHealth: 20
+  MaxHealth: 6
   WallCheckDistance: 0.4
   LedgeCheckDistance: 0.5
   MinAgroDistance: 7

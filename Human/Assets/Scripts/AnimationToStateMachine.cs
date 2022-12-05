@@ -17,6 +17,11 @@ public class AnimationToStateMachine : MonoBehaviour
         EnemyAttackState.FinishAttack();
     }
 
+    private void DeathAction()
+    {
+        EnemyDeadState.DeathAction();
+    }
+
     private void FinishDeath()
     {
         EnemyDeadState.FinishDeath();

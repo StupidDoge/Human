@@ -29,6 +29,7 @@ public class PlayerMoveState : PlayerGroundedState
 
         player.CheckIfShouldFlip(xInput);
         player.SetVelocityX(playerData.MovementVelocity * xInput);
+        player.SoundController.PlayMoveSound();
 
         if (xInput == 0 && !isExitingState)
         {
