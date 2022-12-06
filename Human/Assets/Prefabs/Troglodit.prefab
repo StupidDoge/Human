@@ -43,7 +43,7 @@ GameObject:
   m_Layer: 0
   m_Name: LedgeCheck
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -55,7 +55,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1359704028829446352}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.84, y: -1.6, z: -12.88}
+  m_LocalPosition: {x: 1.5, y: -1.6, z: -12.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -74,7 +74,7 @@ GameObject:
   m_Layer: 0
   m_Name: WallCheck
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -86,7 +86,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1359704029004723082}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.21, y: -0.12, z: -12.88}
+  m_LocalPosition: {x: 1.5, y: 0, z: -12.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -315,6 +315,7 @@ MonoBehaviour:
   _wallCheck: {fileID: 1359704029004723085}
   _ledgeCheck: {fileID: 1359704028829446355}
   _playerCheck: {fileID: 1359704028786889793}
+  _boxCastSize: {x: 1, y: 3.5}
   _moveStateData: {fileID: 11400000, guid: a5f90936ef292894091806e8ba897be0, type: 2}
   _idleStateData: {fileID: 11400000, guid: 99faa7f7790ac5e458778bc2dde41229, type: 2}
   _playerDetectedStateData: {fileID: 11400000, guid: 0e0ca1894f2349948a449416eb9a07b3, type: 2}

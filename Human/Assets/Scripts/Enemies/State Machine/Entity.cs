@@ -20,6 +20,7 @@ public class Entity : MonoBehaviour, IDamageable
     [SerializeField] private Transform _wallCheck;
     [SerializeField] private Transform _ledgeCheck;
     [SerializeField] private Transform _playerCheck;
+    [SerializeField] private Vector2 _boxCastSize;
 
     private Vector2 _velocityWorkspace;
 
@@ -57,7 +58,7 @@ public class Entity : MonoBehaviour, IDamageable
 
     public virtual bool CheckWall()
     {
-        return Physics2D.Raycast(_wallCheck.position, AliveGameObject.transform.right, Data.WallCheckDistance, Data.GroundLayer);
+        return Physics2D.BoxCast(_wallCheck.position, _boxCastSize, 0, AliveGameObject.transform.right, Data.WallCheckDistance, Data.GroundLayer);
     }
 
     public virtual bool CheckLedge()
@@ -109,5 +110,6 @@ public class Entity : MonoBehaviour, IDamageable
         Gizmos.DrawWireSphere(_playerCheck.position + (Vector3)(AliveGameObject.transform.right * Data.CloseRangeActionDistance), 0.2f);
         Gizmos.DrawWireSphere(_playerCheck.position + (Vector3)(AliveGameObject.transform.right * Data.MinAgroDistance), 0.2f);
         Gizmos.DrawWireSphere(_playerCheck.position + (Vector3)(AliveGameObject.transform.right * Data.MaxAgroDistance), 0.2f);
+        Gizmos.DrawWireCube(_wallCheck.position, _boxCastSize);
     }*/
 }
